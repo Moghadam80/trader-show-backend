@@ -103,18 +103,20 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Deployment
+## Deploy on Hamravesh (Darkube)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Push this folder to a Git repository that Hamravesh can access, then create a Git based application in Darkube with:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- Build context: `.`
+- Dockerfile path: `Dockerfile`
+- Service port: `4000`
+- Runtime environment variables:
+  - `PORT=4000`
+  - `DATABASE_PATH=/app/data/expenses.sqlite`
+  - `CORS_ORIGIN=https://<your-frontend-domain>`
+- Domain: the public API domain you choose
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Attach a persistent disk to the backend app and mount it at `/app/data`. The SQLite database is stored at `/app/data/expenses.sqlite`; without persistent storage, expenses may be lost when the container is replaced. Once deployed, verify the API at `/users` and the documentation at `/docs` on your API domain.
 
 ## Resources
 
