@@ -112,11 +112,10 @@ Push this folder to a Git repository that Hamravesh can access, then create a Gi
 - Service port: `4000`
 - Runtime environment variables:
   - `PORT=4000`
-  - `DATABASE_PATH=/app/data/expenses.sqlite`
   - `CORS_ORIGIN=https://<your-frontend-domain>`
 - Domain: the public API domain you choose
 
-Attach a persistent disk to the backend app and mount it at `/app/data`. The SQLite database is stored at `/app/data/expenses.sqlite`; without persistent storage, expenses may be lost when the container is replaced. Once deployed, verify the API at `/users` and the documentation at `/docs` on your API domain.
+The Docker image already sets `DATABASE_PATH=/app/data/expenses.sqlite`, so you do not need to add that variable in the dashboard. If the platform lets you attach persistent storage, mount it at `/app/data` so the SQLite database survives container replacements. Once deployed, verify the API at `/users` and the documentation at `/docs` on your API domain.
 
 ## Resources
 
